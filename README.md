@@ -9,7 +9,7 @@ API REST de gestión de una biblioteca construida con **Java 17 + Spring Boot 4*
 - **Préstamos**: tomar y devolver libros con descuento/restauración automática de ejemplares; un usuario no puede tener el mismo libro dos veces.
 - **Panel admin**: alta de autores, categorías y libros.
 - **Swagger UI** en `/swagger-ui.html` y OpenAPI en `/v3/api-docs`.
-- **Tests**: unitarios con Mockito + integración con MockMvc y H2 (29 tests).
+- **Tests**: backend unitarios con Mockito + integración con MockMvc y H2 (29 tests); frontend con Vitest + React Testing Library (30 tests).
 
 ## Stack
 
@@ -29,7 +29,7 @@ booknest/
 ├── src/test/java/...        # tests unitarios + integración
 ├── frontend/                # React + Vite
 ├── docker-compose.yml       # db (Postgres) + backend + frontend
-└── .github/workflows/ci.yml # CI: tests backend + build frontend
+└── .github/workflows/ci.yml # CI: tests backend + frontend y builds
 ```
 
 ## Arranque rápido
@@ -93,6 +93,17 @@ docker compose up --build
 
 - **Unitarios** (Mockito): `AuthServiceTest`, `BookServiceTest`, `LoanServiceTest`.
 - **Integración** (MockMvc + H2): `BooknestApiTests` cubre el flujo completo (register/login, catálogo, roles, préstamo/devolución, 401/403/409/400).
+
+### Frontend (Vitest + React Testing Library)
+
+```bash
+cd frontend
+npm test
+```
+
+- **api.test.js**: capa de API (query strings, bearer token, 401/204, `fieldErrors`).
+- **App.test.jsx**: flujo de login, navegación por rol y logout.
+- **BookList / MyLoans / AdminBookForm**: catálogo, préstamos y alta de libro.
 
 ## Variables de entorno
 

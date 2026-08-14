@@ -6,6 +6,7 @@ export function getToken() {
 
 export function getSession() {
   return {
+    token: localStorage.getItem('bn_token') || '',
     name: localStorage.getItem('bn_name') || '',
     email: localStorage.getItem('bn_email') || '',
     role: localStorage.getItem('bn_role') || ''
